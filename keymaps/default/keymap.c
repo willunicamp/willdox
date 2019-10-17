@@ -9,11 +9,16 @@
 #define _RS 2
 #define _DT 3
 
+#define MODS_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define MODS_ALT_MASK  (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
+#define MODS_CTRL_MASK  (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTL)|MOD_BIT(KC_LCPO))
+#define MODS_GUI_MASK  (MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI))
+
 #undef OLED_FONT_WIDTH
 #define OLED_FONT_WIDTH 10
 
 enum layer_keycodes {
-    QWERTY = SAFE_RANGE, LOWER, RAISE, DOTA
+    QWERTY = SAFE_RANGE, LOWER, RAISE, DOTA, CONTROL, ALT, SHIFT
 };
 
 bool dota_layer = false;
@@ -36,25 +41,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BL] = LAYOUT_ortho_4x12(
    KC_GESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_MINS,        KC_EQL, KC_6, KC_7,  KC_8,     KC_9, KC_0,   KC_BSPC,  \
    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_HOME,        KC_END, KC_Y, KC_U,  KC_I,     KC_O, KC_P,   KC_BSLS,  \
-   KC_GRV,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,        KC_RBRC,  KC_H, KC_J,  KC_K,     KC_L, KC_SCLN,KC_QUOT,  \
+   LOWER,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,        KC_RBRC,  KC_H, KC_J,  KC_K,     KC_L, KC_SCLN,KC_QUOT,  \
    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_RPRN,        KC_LT,  KC_N, KC_M,  KC_COMMA, KC_DOT ,KC_SLSH,KC_RSFT,  \
-   KC_LCPO, KC_PSCR, KC_LGUI, KC_LALT, KC_LCTL, LOWER,   KC_DEL,         KC_ENT, RAISE, KC_RALT, KC_LEFT,   KC_DOWN, KC_UP,KC_RGHT\
+   KC_LCTL, KC_PSCR, KC_LGUI, KC_LALT, KC_LAPO,LCTL_T(KC_SPC),LSFT_T(KC_ENT),  RSFT_T(KC_ENT), RAISE, KC_RAPC, KC_LEFT,   KC_DOWN, KC_UP,KC_RGHT\
 ),
 
 [_LW] = LAYOUT_ortho_4x12(
-   DOTA,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,   KC_MINS,        KC_EQL, KC_F6, KC_F7,  KC_F8,     KC_F9, KC_F10,   KC_BSPC,  \
-   KC_TAB,KC_Q,    KC_UP,   KC_E,    KC_R,    KC_T,    KC_HOME,        KC_END, KC_Y, KC_P7,  KC_P8,  KC_P9, KC_P,   KC_BSLS,  \
-   KC_ESC,KC_LEFT, KC_DOWN, KC_RGHT, KC_F,    KC_G,    KC_LBRC,        KC_RBRC,  KC_H, KC_P4,  KC_P5,KC_P6, KC_SCLN,KC_QUOT,  \
-   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    KC_RPRN,        KC_LT,  KC_N, KC_P1,  KC_P2, KC_P3 ,KC_SLSH,KC_RSFT,  \
-   KC_LCPO, KC_PSCR, KC_LGUI, KC_LALT, KC_LCTL, LOWER,   KC_DEL,         KC_ENT, RAISE, KC_RALT, KC_P0,   KC_DOWN, KC_UP,KC_RGHT\
+   DOTA,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,   KC_NO,        KC_NO, KC_F6, KC_F7,  KC_F8,     KC_F9, KC_F10,   KC_BSPC,  \
+   KC_NO,KC_NO,    KC_UP,   KC_NO,    KC_NO,    KC_NO,    KC_F11,        KC_F12, KC_NO, KC_P7,  KC_P8,  KC_P9, KC_NO,   KC_NO,  \
+   KC_NO,KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,    KC_NO,    KC_NO,        KC_NO,  KC_NO, KC_P4,  KC_P5,KC_P6, KC_NO,KC_NO,  \
+   KC_NO, KC_NO,    KC_NO,    KC_NO,    KC_NO,  KC_NO,    KC_NO,        KC_NO,  KC_N, KC_P1,  KC_P2, KC_P3 ,KC_NO,KC_NO,  \
+   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,   KC_NO,         KC_NO, KC_NO, KC_RALT, KC_P0,   KC_NLCK, KC_NO,KC_NO\
 ),
 
 [_RS] = LAYOUT_ortho_4x12(
-   DOTA,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    LOWER, KC_X,KC_X, \
-   KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,KC_X,KC_X,  \
-   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,KC_X,KC_X,  \
-   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,KC_X,KC_X,  \
-   KC_LCTL,  KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT,KC_X,KC_X  \
+   RESET, KC_NO, KC_NO, KC_PSCR, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_PSCR, KC_NO, KC_NO, KC_DEL, \
+   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_RALT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO\
 ),
 [_DT] = LAYOUT_ortho_4x12(
    DOTA,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_F1, KC_DEL, KC_6,  KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,  \
@@ -83,7 +88,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         //if I release  the layer key without pressing any other key,
         //the tap flag will still be false
         if((tap==false)&&(timer_elapsed(lower_timer) < TAPPING_TERM)){
-            tap_code(KC_SPC);
+            tap_code(KC_GRV);
         }
       }
       return false;
@@ -129,6 +134,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
+//num lock led
+void led_set_user(uint8_t usb_led) {
+    if (IS_LED_ON(usb_led, USB_LED_NUM_LOCK)) {
+        writePinLow(B0);
+    } else {
+        writePinHigh(B0);
+    }
+}
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;  // flips the display 180 degrees if offhand
 }
@@ -137,10 +151,20 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 void oled_task_user(void) {
   // Host Keyboard Layer Status
   if (is_keyboard_master()) {
-      oled_write_P(PSTR("-----\nlayer\n-----\n"), false);
+      oled_write_P(PSTR("-----layer-----\n"), false);
       switch (biton32(layer_state)) {
         case _BL:
-          oled_write_P(PSTR("  D\n  E\n  F\n  A\n  U\n  L\n  T"), false);
+            if(keyboard_report->mods & MODS_CTRL_MASK){
+              oled_write_P(PSTR("  C\n  O\n  N\n  T\n  R\n  O\n  L"), false);
+            }else if(keyboard_report->mods & MODS_ALT_MASK){
+              oled_write_P(PSTR("   \n   \n  A\n  L\n  T\n   \n   "), false);
+            }else if(keyboard_report->mods & MODS_SHIFT_MASK){
+              oled_write_P(PSTR("   \n  S\n  H\n  I\n  F\n  T\n   "), false);
+            }else if(keyboard_report->mods & MODS_GUI_MASK){
+              oled_write_P(PSTR("   \n   \n  G\n  U\n  I\n   \n   "), false);
+            }else{
+              oled_write_P(PSTR("  D\n  E\n  F\n  A\n  U\n  L\n  T"), false);
+            }
           break;
         case _LW:
           oled_write_P(PSTR("  L\n  O\n  W\n  E\n  R\n   \n   "), false);
@@ -149,7 +173,7 @@ void oled_task_user(void) {
           oled_write_P(PSTR("  R\n  A\n  I\n  S\n  E\n   \n   "), false);
           break;
         case _DT:
-          oled_write_P(PSTR("DOTA\nDOTA\nDOTA"), false);
+          oled_write_P(PSTR("   \n  D\n  O\n  T\n  A\n   \n   "), false);
           //nder_logo(); 
           break;
           // Or use the write_ln shortcut over adding '\n' to the end of your string
@@ -157,14 +181,15 @@ void oled_task_user(void) {
           oled_clear();
           break;
       }
+  uint8_t led_usb_state = host_keyboard_leds();
+oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("\n\nNUMLK") : PSTR("\n\n     "), false);
   }else{
-         oled_write_P(PSTR(" ___ \n|[_]|\n|+ ;|\n`---'"), false);
+         oled_write_P(PSTR(" ___ |   ||[_]||   ||+ ;||   |`---'"), false);
   }
+
 }
 
   // Host Keyboard LED Status
-//  uint8_t led_usb_state = host_keyboard_leds();
-  //oled_write_P(led_usb_state & (1<<USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
   //oled_write_P(led_usb_state & (1<<USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
   //oled_write_P(led_usb_state & (1<<USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
 #endif
