@@ -1,4 +1,4 @@
-#include "lets_split.h"
+#include "willdox.h"
 
 #ifdef SWAP_HANDS_ENABLE
 __attribute__ ((weak))
@@ -14,3 +14,18 @@ const keypos_t hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
   {{0, 3}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {5, 3}},
 };
 #endif
+
+void matrix_init_kb(void) {
+
+    // // green led on
+    // DDRD |= (1<<5);
+    // PORTD &= ~(1<<5);
+
+    // // orange led on
+    // DDRB |= (1<<0);
+    // PORTB &= ~(1<<0);
+
+	matrix_init_user();
+
+    oled_init(OLED_ROTATION_270);
+};

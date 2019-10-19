@@ -1,11 +1,8 @@
+#ifndef WILLDOX_H
+#define WILLDOX_H
 #pragma once
 
-#include "willdox.h"
-
-//void promicro_bootloader_jmp(bool program);
 #include "quantum.h"
-
-//void promicro_bootloader_jmp(bool program);
 
 #define LAYOUT( \
 	L00, L01, L02, L03, L04, L05, L06, R00, R01, R02, R03, R04, R05, R06,\
@@ -25,6 +22,4 @@
 		{ R20, R21, R22, R23, R24, R25, R26}, \
 		{ R30, R31, R32, R33, R34, R35, R36}, \
 		{ R40, R41, R42, R43, R44, R45, R46} \
-	}
-
-#define LAYOUT_ortho_4x12 LAYOUT
+}

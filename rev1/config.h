@@ -1,3 +1,5 @@
+#ifndef CONFIG_H
+#define CONFIG_H
 /*
 Copyright 2012 Jun Wako <wakojun@gmail.com>
 Copyright 2015 Jack Humbert
@@ -59,9 +61,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 /* ws2812 RGB LED */
-//#define RGB_DI_PIN D3
+#define RGB_DI_PIN D2
 
-//#define RGBLED_NUM 16    // Number of LEDs
+#define RGBLED_NUM 4    // Number of LEDs
 
 /*
  * Feature disable options
