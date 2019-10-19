@@ -64,6 +64,4 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 SPLIT_KEYBOARD = yes
 
-LAYOUTS = ortho_4x12
-
-DEFAULT_FOLDER = lets_split/rev1
+DEFAULT_FOLDER = willdox
