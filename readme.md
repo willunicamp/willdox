@@ -1,63 +1,23 @@
-Willdox - Let's split modified for a custom redox
+Willdox - Will's custom REDOX keyboard
 ======
 
 ## Note
 lufa.c file overrides tmk_core/protocol/lufa/lufa.c, adding a 2500ms delay before initialize main, for qmk to load after the initialization of the oled screens I've added in the keyboard.
 
-## Build Guide
-
-A build guide for putting together the Let's Split v2 can be found here: [An Overly Verbose Guide to Building a Let's Split Keyboard](https://github.com/nicinabox/lets-split-guide)
-
-There is additional information there about flashing and adding RGB underglow.
-
-A build guide for putting together the sockets version can be found here: *Guide will be made and linked here when the PCBs have been received and tested*
 
 ## First Time Setup
 
-Download or clone the `qmk_firmware` repo and navigate to its top level directory. Once your build environment is setup, you'll be able to generate the default .hex using:
+Download or clone the `qmk_firmware` repo and navigate to its top level directory. Clone this repo inside the keyboards folder and once your build environment is setup, you'll be able to generate the default .hex using:
 
 ```
-$ make lets_split/rev2:default
+$ make willdox:default
 ```
 
 You will see a lot of output and if everything worked correctly you will see the built hex file:
 
 ```
-lets_split_rev2_default.hex
+willdox_default.hex
 ```
-
-If you would like to use one of the alternative keymaps, or create your own, copy one of the existing [keymaps](keymaps/) and run make like so:
-
-
-```
-$ make lets_split/rev2:YOUR_KEYMAP_NAME
-```
-
-If everything worked correctly you will see a file:
-
-```
-lets_split_rev2_YOUR_KEYMAP_NAME.hex
-```
-
-For more information on customizing keymaps, take a look at the primary documentation for [Customizing Your Keymap](/docs/faq_keymap.md) in the main readme.md.
-
-### Let's split 1.0
-If you have a first generation Let's Split you will need to use the revision 1 code. To do so, use `rev1` in all your commands instead.
-
-Features
---------
-
-For the full Quantum Mechanical Keyboard feature list, see [the parent readme.md](/readme.md).
-
-Some features supported by the firmware:
-
-* Either half can connect to the computer via USB, or both halves can be used
-  independently.
-* You only need 3 wires to connect the two halves. Two for VCC and GND and one
-  for serial communication.
-* Optional support for I2C connection between the two halves if for some
-  reason you require a faster connection between the two halves. Note this
-  requires an extra wire between halves and pull-up resistors on the data lines.
 
 Required Hardware
 -----------------
@@ -65,40 +25,10 @@ Required Hardware
 Apart from diodes and key switches for the keyboard matrix in each half, you
 will need:
 
-* 2 Arduino Pro Micros. You can find these on AliExpress for ≈3.50USD each.
-* 2 TRRS sockets and 1 TRRS cable, or 2 TRS sockets and 1 TRS cable
-
-Alternatively, you can use any sort of cable and socket that has at least 3
-wires. If you want to use I2C to communicate between halves, you will need a
-cable with at least 4 wires and 2x 4.7kΩ pull-up resistors
-
-Optional Hardware
------------------
-
-A speaker can be hooked-up to either side to the `5` (`C6`) pin and `GND`, and turned on via `AUDIO_ENABLE`.
-
-Wiring
-------
-
-The 3 wires of the TRS/TRRS cable need to connect GND, VCC, and digital pin 3 (i.e.
-PD0 on the ATmega32u4) between the two Pro Micros.
-
-Next, wire your key matrix to any of the remaining 17 IO pins of the pro micro
-and modify the `matrix.c` accordingly.
-
-The wiring for serial:
-
-![serial wiring](https://i.imgur.com/C3D1GAQ.png)
-
-The wiring for i2c:
-
-![i2c wiring](https://i.imgur.com/Hbzhc6E.png)
-
-The pull-up resistors may be placed on either half. It is also possible
-to use 4 resistors and have the pull-ups in both halves, but this is
-unnecessary in simple use cases.
-
-You can change your configuration between serial and i2c by modifying your `config.h` file.
+* 2 Arduino Pro Micros. You can find these on AliExpress.
+* 2 TRRS sockets and 1 TRRS cable, or 2 TRS sockets and 1 TRS cable. Worth notice that the PCB is made for serial communication, so only three wires are necessary to connect both halves.
+* 2 I2C OLED screens. You can find these on AliExpress too.
+* Materials and tools to make the PCB (in my case, I used phenolite boards and ferric chloride, the board lines are thick ehough for that),
 
 Notes on Software Configuration
 -------------------------------
