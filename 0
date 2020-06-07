@@ -54,7 +54,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define BACKLIGHT_LEVELS 3
 
 /* Set 0 if debouncing isn't needed */
-//I don't know why mine works only with 0 debounce
 #define DEBOUNCE 0
 
 /* serial.c configuration for split keyboard */
